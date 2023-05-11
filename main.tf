@@ -26,6 +26,7 @@ resource "aws_security_group" "elasticache" {
     to_port          = 0
     protocol         = "-1"
     cidr_blocks      = ["0.0.0.0/0"]
+
   }
 
   tags = merge(
@@ -33,7 +34,6 @@ resource "aws_security_group" "elasticache" {
     { Name = "${var.env}-elasticache-security-group"}
   )
 }
-
 
 resource "aws_elasticache_replication_group" "elasticache" {
   automatic_failover_enabled  = true
