@@ -52,3 +52,16 @@ resource "aws_elasticache_replication_group" "elasticache" {
     { Name = "${var.env}-elasticache"}
   )
 }
+
+resource "aws_elasticache_cluster" "redis-instance" {
+  cluster_id           = "${var.env}-elasticache-instance"
+  engine               = var.engine
+  node_type            = var.node_type
+  num_cache_nodes      = var.num_cache_nodes
+  engine_version       = var.engine_version
+  port                 = 6379
+}
+
+output "aws_elasticache" {
+  value = aws_elasticache_cluster.redis-instance
+}
